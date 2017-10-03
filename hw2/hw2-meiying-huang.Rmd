@@ -1,0 +1,29 @@
+---
+title: "hw2-meiying-huang"
+author: "Meiying Huang"
+date: "9/29/2017"
+output: github_document
+---
+```{r}
+read.csv('nba2017-player-statistics.csv')
+str('nba2017-player-statistics.csv')
+```
+
+```{r}
+library(readr)
+read_csv('nba2017-player-statistics.csv')
+data1<-str('nba2017-player-statistics.csv')
+data1
+data2<-data1$experience[0=="R"]
+
+#replace "R" with
+
+```
+
+##5
+```{r}
+##select MPG >=20, and create the players2 data frame
+##players2<-dataframe1[select(MPG>="20")]
+
+```
+
