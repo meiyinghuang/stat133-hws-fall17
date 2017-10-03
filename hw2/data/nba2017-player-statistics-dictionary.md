@@ -5,8 +5,11 @@ data source for GSW: http://www.basketball-reference.com/teams/GSW/2017.html
 
 
 Player: first and last names of player
+
 Team: 3-letyter team abbreviation
+
 Position: player's position
+
 Experience: years of experience in NBA (a value of R means rookis)
 Salary: player salary in dollars
 Rank: Rank of player in his team
