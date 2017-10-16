@@ -36,7 +36,7 @@ dat2$efficiency=((dat2$points+dat2$rebounds+dat2$assists+dat2$steals+dat2$blocks
 dat3<-cbind(player=dat2$player,dat2$missed_fg,dat2$missed_ft,dat2$points,dat2$rebounds,dat2$efficiency)
 
 sink(file= '/Users/liminhuang/hw03/output/efficiency-summary.txt')
-## summary(efficiency)
+summary(efficiency)
 sink()
 ```
 
@@ -232,11 +232,15 @@ ggplot(teams,aes(x=reorder(team, efficiency) ,y=efficiency))+
 ##ranking#2:From the "NBA Teams ranked by Total Points" ranking, we can see that GSW is ranked at top 1 and SAC has the least total points. The average total point for team is around 8000.
 
 ##ranking#3: From the "NBA Teams ranked by Total Efficiency" ranking, we can see that CLE is the most efficient team, and ORL has the least efficiency. And the average efficiency among thes NBA teams is around 150
+
+##Overall: From three ranking plots as above, we noticed that some teams like GSW, CLE have a stronger performances than others.Especially CLE which has the highest salary and is the most efficient team. And for those teams which are the least efficient team are more likely to have a lower total point and lower salary.
 ```
 
 ``` r
 ##PCA:principal components Analysis
 #to get a data frame with the eigenvalues
+nba_pc=prcomp(~points3+points2+free_throws+off_rebounds+def_rebounds+assists+steals+blocks+turnovers+fouls, data=teams, scale.=TRUE)
+##way2
 pca1<-select(teams,points3,points2,free_throws,off_rebounds,def_rebounds,assists,steals,blocks,turnovers,fouls)
 pca<-prcomp(pca1,scale. = TRUE)##is "true" indicates pca is performed on standardized data(mean=0,var=1)
 pca
@@ -278,6 +282,8 @@ names
 
 ``` r
 ##creat a data frame with eigenvalues
+pc1_all_teams=nba_pc$x[,1]
+pc2_all_teams=nba_pc$x[,2]
 
 eigs<-data.frame(team=teams$team,
                    eigenvalue=pca$sdev^2,
