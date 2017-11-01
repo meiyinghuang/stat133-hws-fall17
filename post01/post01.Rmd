@@ -5,7 +5,7 @@ date: "10/25/2017"
 output: html_document
 ---
 #Abstract
-##This post involves analyzing data of top 5 professional sports in the U.S. in the 2016-2017 season.Data includes the revenue, average salary, highest salary. The purpose of this post is to study the different salary of 5 professional sports, and mainly identify the factors that are most likely to contribute to NBA player salaries. And to identify the performance variables i.e. scoring, assists, fouls, and other variables that significantly contributed to determine a NBA player's salary. Additionally, this post also indentifies some question whether NBA plsyers are overpaid or underpaid.
+#This post involves analyzing data of top 5 professional sports in the U.S. in the 2016-2017 season.Data includes the revenue, average salary, highest salary. The purpose of this post is to study the different salary of 5 professional sports, and mainly identify the factors that are most likely to contribute to NBA player salaries. And to identify the performance variables i.e. scoring, assists, fouls, and other variables that significantly contributed to determine a NBA player's salary. Additionally, this post also indentifies some question whether NBA plsyers are overpaid or underpaid.
 ##keywords: Professional Sports, National Basketball Assiciation, Player Salaries, Player Performances
 
 #Introduction
@@ -299,7 +299,7 @@ ggplot(data=data2,aes(x=gp, y=salary))+
 ##It shows a not strong relationship between game played and salary. Players have a higher game_played rate, tend to have a higher salary. But it is week.  
 
 #Conclusions
-## The purpose for this study was to study between NBA players' average salary and other professional sports' average salary. And identify the variables that were most likely to contribute to NBA player salaries. I found that game played and height were the two main contributors to NBA player salary. Moreover, rebounds, assists, and personal fouls were statistically significant.Players who has a lower rebound rate tend to have a higher salary.Additionally, in the case of fouls, players who fouls a lot, tend to have a higher missed free throws.
+## NBA players have the highest average salary among those top 5 polular professional sports. The purpose for this study was to study between NBA players' average salary and other professional sports' average salary. And identify the variables that were most likely to contribute to NBA player salaries. I found that game played and height were the two main contributors to NBA player salary. Moreover, rebounds, assists, and personal fouls were statistically significant. In regards to assists, teams may be focusing on a player's ability to contribute to scoring. In regards to rebounds, the value of a player can be enhanced if the player is able to either prevent the opponent from another scoring chance by grabbing defensive rebounds and conversely, providing additional scoring chances for his team by grabbing offensive rebounds. However, players who has a lower rebound rate tend to have a higher salary. Additionally, in the case of fouls, players who fouls a lot, tend to have a higher missed free throws.On the other hand, a player who does not accumulate fouls is definitly an asset to his team.
  
 ##Reference:
 1,NBA2017-players.csv. Retrieved from https://github.com/ucb-stat133/stat133-fall-2017/raw/master/data/nba2017-players.csv
