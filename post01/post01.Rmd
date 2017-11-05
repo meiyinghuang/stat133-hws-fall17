@@ -1,39 +1,37 @@
 ---
-title: "post01"
+title: "Post01-Meiying Huang"
 author: "Meiying Huang"
 date: "10/25/2017"
-output: html_document
+output: github_document
 ---
-#Abstract
-##This post involves analyzing data of top 5 professional sports in the U.S. in the 2016-2017 season.Data includes the revenue, average salary, highest salary. The purpose of this post is to study the different salary of 5 professional sports, and mainly identify the factors that are most likely to contribute to NBA player salaries. And to identify the performance variables i.e. scoring, assists, fouls, and other variables that significantly contributed to determine a NBA player's salary. Additionally, this post also indentifies some question whether NBA plsyers are overpaid or underpaid.
-##keywords: Professional Sports, National Basketball Assiciation, Player Salaries, Player Performances
 
-#Introduction
-##In the 2016-2017 National Basketball Association(NBA) season, LeBron James earned the highest salary $30.96 million. The average salary of an NBA player for the 2016-2017 season was $6.2 million which was higher than the average salary of a National Football League(NFL), National Hockey League(NHL),Major League Baseball(MLB), or Major League Soccer(MLS). What's more, 34.2% of NBA players have a salary higher than the NBA player average salary. 
-
-```{r}
-csv <- "https://github.com/ucb-stat133/stat133-fall-2017/raw/master/data/nba2017-players.csv"
-download.file(url = csv, destfile ='nba2017-players.csv')
-
-dat <- read.csv('nba2017-players.csv', stringsAsFactors = FALSE)
-write.csv(dat,
-          file="/Users/liminhuang/post01/data/nba2017-ststa.csv",row.names=FALSE)
-
-dim(dat)
-summary(dat)
-library(qdap)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, error = TRUE)
 ```
 
+##Abstract
+####This post involves analyzing data of top 5 professional sports in the U.S. in the 2016-2017 season. Data includes the revenue, average salary, highest salary. The purpose of this post is to study the different salary of 5 professional sports, and mainly identify the factors that are most likely to contribute to NBA player salaries. The objective of this post is to explain the salaries of the National Basketball Association(NBA) players. This post is to provide analytics for professional basketball teams and it inlcudes determining the factors resulting in high or low salaries to the player. In other words, it is to identify the performance variables i.e. scoring, assists, fouls, and other variables that significantly contributed to determine a NBA player's salary. 
+
+##Keywords: Professional Sports, National Basketball Assiciation, Player Salaries, Player Performances
+
+##Introduction
+####In the 2016-2017 National Basketball Association(NBA) season, LeBron James earned the highest salary $30.96 million. The average salary of an NBA player for the 2016-2017 season was $6.2 million which was higher than the average salary of a National Football League(NFL), National Hockey League(NHL),Major League Baseball(MLB), or Major League Soccer(MLS). What's more, 34.2% of NBA players have a salary higher than the NBA player average salary. Standard economic reasoning suggest that a NBA player's salary will be set to approximately equal his expected contribution to the team's revenues over the season and that is what we called "marginal revenue product." From a fan's perspective, a player's contributions mostly relate to the team's win-rate: can this athlete help win the team more games and eventually secure a championship title.
+
+####Getting the data: The data is gathered from different places: NBA.com States, Basketball Reference, github.
+####Cleaning: As it turns out, a lot of the columns of data needed to be removed. 
+####Modeling: Most of the model used their stats as an input, and salary as output. Therefore, throughout this post, I frequently refer to the term of different cost driver, which is an independenrt variable that drivers or affect the dependent variable of salary. Basically, I gathered data and put salary on the y-axis by using different terms of x-axis variables. The different cost drivers I chose for testing are inlcuding total points scored, rebounds, assists, games player, height, point per game, and efficiency. The output is scaled from the min to max contract price for 2016-2017 deason. 
+####Shortcomings: It is important to note that this only analyzes stats based on past year performance, which is very isolated. It doesn't take into account team strength, and potential(though many models take wins into account).
 ```{r}
 library(dplyr)
 library(ggplot2)
+
 dat2<-read.csv("~/stat133/stat133-hws-fall17/stat133/stat133-hws-fall17/hw03/data/nba2017-stats.csv")
 write.csv(dat2,
-          file="/Users/liminhuang/post01/data/nba2017-ststa.csv",row.names=FALSE)
+          file="/Users/liminhuang/stat133-hws-fall17/post01/nba2017-ststa.csv",row.names=FALSE)
 
 dat3<- read.csv("~/stat133/stat133-hws-fall17/stat133/stat133-hws-fall17/hw03/data/nba2017-roster.csv")
 write.csv(dat3,
-          file = "/Users/liminhuang/post01/data/nba2017-roster.csv",row.names = FALSE)
+          file = "/Users/liminhuang/stat133-hws-fall17/post01/nba2017-roster.csv",row.names = FALSE)
 ```
 
 
@@ -51,7 +49,8 @@ png(file="barchart_sports_revenue.png")
 barplot(value,names.arg= sports, xlab= "Sports", ylab="revenue", col="orange",main="Top 5 professional sports leagues in U.S. by Revenue (in 2016 by billion)")
 dev.off()
 ```
-##From the revenue barplot, NFL has the highest revenue in 2016 followed by MLB($9.5 billion), NBA($4.8 billion), NHL($3.7 billion), and MLS($0.6 billion). According to ESP, the major reason of NFL has a highest revenue is its sponsorship revenue. NFL received $1.25 billion(9.6% of its total revenue) in 2016 season. Another major money maker for the NFL is its $1 billion per season(four-year $4 billion partnership) with DirecTV.
+
+####From the revenue barplot, NFL has the highest revenue in 2016 followed by MLB($9.5 billion), NBA($4.8 billion), NHL($3.7 billion), and MLS($0.6 billion). According to ESP, the major reason of NFL has a highest revenue is its sponsorship revenue. NFL received $1.25 billion(9.6% of its total revenue) in 2016 season. Another major money maker for the NFL is its $1 billion per season(four-year $4 billion partnership) with DirecTV.
 
 ```{r}
 ##major U.S. sports leagues
@@ -78,7 +77,8 @@ png(file="barchart_sports_avg_salary.png")
 barplot(H,names.arg= sports, xlab= "Sports", ylab="Avg_salary(million)", col="blue",main="Avg_salary of 5 most popular sports")
 dev.off()
 ```
-#According to "The average player salary and highest-paid in NBA,MLB,NHL,NFL and MLS," the average salary of an NBA player for the 2016-2017 season is $6.2 million which is tops across all sports, followed by MLB($4.4 million), NHL($2.9 million), NFL($2.1 million), and MLS($0.3 million). Although NFL has a higher renenver than NBA, NFl's average salary is lower than NBA's average salary. One of the reasons is that NBA players get a slightly bigger slice of league revenue than do NFL players. NBA players get roungly half of all league revenue before expense. Secondly, the major reason is that NFL has a bigger rosters size than NBA. Even NFL players get twice as much money as NBA players, NFL has almost four times as many athletes as NBA. For example, there are 32 NFL teams with 53 rosters spots each, total has 1696 NFL players at any given moment. Meanwhile, NBA has 30n teams with 15 rosters spots each, making only around 450 NBA players. 
+
+####According to "The average player salary and highest-paid in NBA,MLB,NHL,NFL and MLS," the average salary of an NBA player for the 2016-2017 season is $6.2 million which is tops across all sports, followed by MLB($4.4 million), NHL($2.9 million), NFL($2.1 million), and MLS($0.3 million). Although NFL has a higher renenver than NBA, NFl's average salary is lower than NBA's average salary. One of the reasons is that NBA players get a slightly bigger slice of league revenue than do NFL players. NBA players get roungly half of all league revenue before expense. Secondly, the major reason is that NFL has a bigger rosters size than NBA. Even NFL players get twice as much money as NBA players, NFL has almost four times as many athletes as NBA. For example, there are 32 NFL teams with 53 rosters spots each, total has 1696 NFL players at any given moment. Meanwhile, NBA has 30n teams with 15 rosters spots each, making only around 450 NBA players. 
 ```{r}
 ##avg_salary and highest salary in 5 different sports
 colors<- c("blue", "green")
@@ -93,23 +93,24 @@ barplot(values,main = "avg salary and highest salary in 5 different sports", nam
 legend("topright",salary, cex = 1,fill = colors)
 dev.off()
 ```
-##The "avg salary and highest salary in 5 different sports" shows the average salary and highest salary break down among the major U.S. sports leagues based on the 2016 data.As we can see, MLB player Clayton Kershaw has the highest salary $32 million, followed by NFL player Drew Brees with $31.25 million,NBA players LeBron James with $31 million, NHL player Anze Kopitar with $14 million, and MLS player Kaka with $7.2 million. 
+
+####The "avg salary and highest salary in 5 different sports" shows the average salary and highest salary break down among the major U.S. sports leagues based on the 2016 data.As we can see, MLB player Clayton Kershaw has the highest salary $32 million, followed by NFL player Drew Brees with $31.25 million,NBA players LeBron James with $31 million, NHL player Anze Kopitar with $14 million, and MLS player Kaka with $7.2 million. 
 
 
 ```{r}
 ##average salary group by player
-salary_player<-dat[, c('salary','player')]
+salary_player<-dat3[, c('salary','player')]
 salary_player
-mean(dat$salary)
+mean(dat3$salary)
 ##The average salary of an NBA player for the 2016-2017 season was $6.19million. 
 ```
 
 ```{r}
 ##Pie Chart with Percentages
 ##Creat data for the graph
-nrow(dat[dat$player,])  
-mean(dat$salary)
-dat1<-arrange(dat,desc(salary))##441
+nrow(dat3[dat3$player,])  
+mean(dat3$salary)
+dat1<-arrange(dat3,desc(salary))##441
 
 salary1<-dat1[dat1$salary>=20000000,]
 nrow(salary1)  ##28
@@ -146,8 +147,9 @@ legend("topright",c("salary1","salary2",
 ##save the file
 dev.off()
 ```
-##Frist of all, as we saw in the results, the average salary of an NBA player for the 2016-2017 season was $6,187,014 (around $6.2 million.) (Around 40.6%) Most of the NBA players earned between $1 million and $5 million during 2016 to 2017 season. 81.6% of the NBA players earned more than $1 million in 2016-2017 season. 
-##What's more, from the pie chart of salary, 28 (6.3%) of NBA players enrned higher than $20 million during the 2016-2017 deason. 
+
+####Frist of all, as we saw in the results, the average salary of an NBA player for the 2016-2017 season was $6,187,014 (around $6.2 million.) (Around 40.6%) Most of the NBA players earned between $1 million and $5 million during 2016 to 2017 season. 81.6% of the NBA players earned more than $1 million in 2016-2017 season. 
+####What's more, from the pie chart of salary, 28 (6.3%) of NBA players enrned higher than $20 million during the 2016-2017 deason. 
 
 ```{r}
 above_avg_salary<- dat1[dat1$salary>=6187014,]
@@ -166,25 +168,30 @@ dev.off()
 head(salary,1)
 ```
 
-##From the pie chart of the avg_salary, there was 65.8% of NBA players have a salary below the average salary and only 34.2% of NBA players have a salary higher than the average salary. However, in the 2016-2017, the highest salary was Cleveland Cavaliers's Lebron James who made $31 million.
+####From the pie chart of the avg_salary, there was 65.8% of NBA players have a salary below the average salary and only 34.2% of NBA players have a salary higher than the average salary. However, in the 2016-2017, the highest salary was Cleveland Cavaliers's Lebron James who made $31 million.
 
 ```{r}
 ##Performance of players
 ##scatterplot_1
-ggplot(data=dat,aes(x=points, y=salary))+
-  geom_point(aes(color= position, size=points3, alpha=0.7))+
+mutate(dat3,dat)
+ggplot(data=dat3,aes(x=points, y=salary))+
+  geom_point(aes(color= position), alpha=0.7)+
   ggtitle("points vs salary")
   
 ```
 
 ```{r}
-ggplot(data = dat, 
-       aes(x = points, y = salary)) +
+total_points=3*dat2$points3_made+2*dat2$points2_made+dat2$points1_made
+dat3<-mutate(dat3,total_points)
+ggplot(data = dat3, 
+       aes(x = total_points, y = salary)) +
   geom_point(aes(color= position),alpha=0.7) +
   facet_wrap(~ position)+
   geom_smooth(method = loess)+
   ggtitle("points vs salary in different positions")
 ```
+
+####Here is a general plot of how different total points affect the salary in different positions. The relationship between the total points and salary is not very strong but we can see that the higher points player make, the higher salary they are tending to get. 
 
 ```{r}
 data1<-data.frame(dat2)
@@ -197,22 +204,13 @@ steals=dat2$steals
 blocks=dat2$blocks
 turnovers=dat2$turnovers
 fouls=dat2$fouls
-efficiency=points+rebounds+assist+steals+blocks-missed_fg-
+efficiency=total_points+rebounds+assist+steals+blocks-missed_fg-
   missed_ft-turnovers
 min_per_game=dat2$minutes/dat2$games_played
 position=dat3$position
 pts_per_game=total_points/dat2$games_played
 
-data2<-mutate(data1,missed_fg,missed_ft,total_points,rebounds,assist,steals,blocks,turnovers,fouls,efficiency,min_per_game,pts_per_game,salary, position)
-```
-
-```{r}
-ggplot(data = data2, 
-       aes(x = total_points, y = salary)) +
-  geom_point(aes(color= position),alpha=0.9) +
-  facet_wrap(~ position)+
-  geom_smooth(method = loess)+
-  ggtitle("total points vs salary")
+data2<-mutate(dat3,missed_fg,missed_ft,total_points,rebounds,assist,steals,blocks,turnovers,fouls,efficiency,min_per_game,pts_per_game,salary, position)
 ```
 
 ```{r}
@@ -238,8 +236,10 @@ png(file="barchart_position_salary.png")
 barplot(value,names.arg= positions, xlab= "position", ylab="avg_salary", col="orange",main="positions vs salary of NBA player")
 dev.off()
 ```
-##Among 441 NBA player, C position players have a higher average salary of $7.0 million. And SG position players have a lowest average salary $5.5 million which is $1.5 millions lower than C position player.
-##It shows us that the salary does not has a strong relationship with positions. But C position players tend to have a higher average salary
+
+####Among 441 NBA player, C position players have a higher average salary of $7.0 million. And SG position players have a lowest average salary $5.5 million which is $1.5 millions lower than C position player.
+
+####It shows us that the salary does not has a strong relationship with positions. But C position players tend to have a higher average salary
 
 ```{r}
 height=dat3$height
@@ -247,7 +247,8 @@ ggplot(data=data2,aes(x=height, y=salary))+
   geom_point(aes(color= position))+
   ggtitle("height vs salary")
 ```
-##There appears to be a weak positive correlation between the players height vs salary.However, it shows us that C position players tend to have a higer height between 82 to 88, followed by PF position player (between 80 to 85), SF position player(between 78 to 82), SG position player(between 75 to 78), and PG position player(between 68 to 77).
+
+####There appears to be a weak positive correlation between the players height vs salary.However, it shows us that C position players tend to have a higer height between 82 to 88, followed by PF position player (between 80 to 85), SF position player(between 78 to 82), SG position player(between 75 to 78), and PG position player(between 68 to 77).
 
 ```{r}
 experience=dat3$experience
@@ -255,7 +256,8 @@ ggplot(data=data2,aes(x=experience, y=salary))+
   geom_point(aes(color= position))+
   ggtitle("experience vs salary")
 ```
-##There appears to be a positive correlation between the players experience vs salary. Players with higher experience tend to have a higher salary. 
+
+####There appears to be a positive correlation between the players experience vs salary. Players with higher experience tend to have a higher salary. 
 
 ```{r}
 efficiency= data2$efficiency
@@ -263,7 +265,9 @@ ggplot(data=data2,aes(x=efficiency, y=salary))+
   geom_point(aes(color= position))+
   ggtitle("efficiency vs salary")
 ```
-##It shows a week correlation between efficiency and salary.
+
+####It shows a week correlation between efficiency and salary. Hoever, the higher efficiency, the higher salary NBA players are tending to have.
+
 ```{r}
 points_per_game=data2$pts_per_game
 ggplot(data=data2,aes(x=points_per_game, y=salary))+
@@ -271,7 +275,8 @@ ggplot(data=data2,aes(x=points_per_game, y=salary))+
   ggtitle("points per game vs salary")
 
 ```
-##It shows a week correlation between fouls and salary.
+
+####It shows a week correlation between fouls and salary.
 
 ```{r}
 rebounds=data2$rebounds
@@ -279,7 +284,9 @@ ggplot(data=data2,aes(x=rebounds, y=salary))+
   geom_point(aes(color= position))+
   ggtitle("rebounds vs salary")
 ```
-##It shows a week correlation between rebounds and salary.
+
+####It shows a week correlation between rebounds and salary.
+
 ```{r}
 fouls=data2$fouls
 missed_ft=data2$missed_ft
@@ -287,7 +294,8 @@ ggplot(data=data2,aes(x=fouls, y=missed_ft))+
   geom_point(aes(color= position))+
   ggtitle("fouls vs missed free throws")
 ```
-##Players who fouls a lot tend to have a higher rate of missed free throws.
+
+####Players who fouls a lot tend to have a higher rate of missed free throws.
 
 ```{r}
 gp=data2$games_played
@@ -296,18 +304,27 @@ ggplot(data=data2,aes(x=gp, y=salary))+
   ggtitle("games played vs salary")
 ```
 
-##It shows a not strong relationship between game played and salary. Players have a higher game_played rate, tend to have a higher salary. But it is week.  
+####It shows a not strong relationship between game played and salary. Players have a higher game_played rate, tend to have a higher salary. But it is week.  
 
-#Conclusions
-## The purpose for this study was to study between NBA players' average salary and other professional sports' average salary. And identify the variables that were most likely to contribute to NBA player salaries. I found that game played and height were the two main contributors to NBA player salary. Moreover, rebounds, assists, and personal fouls were statistically significant.Players who has a lower rebound rate tend to have a higher salary.Additionally, in the case of fouls, players who fouls a lot, tend to have a higher missed free throws.
- 
+##Conclusions
+#### The purpose for this study was to study between NBA players' average salary and other professional sports' average salary. And identify the variables that were most likely to contribute to NBA player salaries. I found that game played and height were the two main contributors to NBA player salary. Moreover, rebounds, assists, and personal fouls were statistically significant.Players who has a lower rebound rate tend to have a higher salary. Additionally, in the case of fouls, players who fouls a lot, tend to have a higher missed free throws. 
+#### However, points scored, assists, rebounds, and games player can not determine with absolute certainly an NBA player's salary based on this statistic analysis. What's more, I was able to leartn that a player's salary is not solely based on the measurable performance stats. There are some immeasurable factors such as popularity, exposure, loyalty, and leadership which determinded a palyer's value as well. 
+#### Based on this reasearch, I believed that nba player's salary is determined by both personal characteristics and on-court performance. For further research, I will like to study about if signing a new contract have any incentive or effect on the player's performance which makes the player be overpaid or underpaid in the year of signing the contract? And which kind of contracts and what king of players tend to be overpaid? In order to do that, I will introduce the on-court performance, personal characteristics and salary. Then I will build and find a connection between them and run two regressions to analyze the determinants of salary and overpayment in the year of signing a new contract. 
+
 ##Reference:
 1,NBA2017-players.csv. Retrieved from https://github.com/ucb-stat133/stat133-fall-2017/raw/master/data/nba2017-players.csv
+
 2,Kurt, B. (2017). The average player salary and highest-paid in NBA, MLB, NHL, NFL and MLS. Retrieved from https://www.forbes.com/sites/kurtbadenhausen/2016/12/15/average-player-salaries-in-major-american-sports-leagues/#8df0e8a10505
+
 3,Raul,(2016). Which professional sports leagues make the most money. Retrived from: https://howmuch.net/articles/sports-leagues-by-revenue
+
 4,Major league soccer teams ranked by revenue in 2016(in million U.S. dollars). Retrieved from https://www.statista.com/statistics/477857/team-revenue-of-mls-soccer-teams/
+
 5,Ike,E (2014). How the NFL makes the most money of any pro sport. Retrieved from https://www.cnbc.com/2014/09/04/how-the-nfl-makes-the-most-money-of-any-pro-sport.html
+
 6,ESP. Retrieved from http://www.sponsorship.com/Latest-Thinking/Sponsorship-Infographics/NFL-Sponsorship-Revenue-Totals-$1-25-Billion-In-20.aspx
+
 7,nba2017-ststa.csv. Retrieved from https://github.com/ucb-stat133/stat133-fall-2017/raw/master/data/nba2017-ststa.csv
+
 8, Determinations of NBA player Salaries. Retrieved from 
 http://thesportjournal.org/article/determinants-of-nba-player-salaries/
