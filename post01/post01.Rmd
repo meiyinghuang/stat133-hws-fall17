@@ -2,7 +2,7 @@
 title: "Post01-Meiying Huang"
 author: "Meiying Huang"
 date: "10/25/2017"
-output: github_document
+output: html_document
 ---
 <<<<<<< HEAD
 =======

@@ -3,6 +3,20 @@ Post01-Meiying Huang
 Meiying Huang
 10/25/2017
 
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+=================================
+
+Abstract
+========
+
+This post involves analyzing data of top 5 professional sports in the U.S. in the 2016-2017 season.Data includes the revenue, average salary, highest salary. The purpose of this post is to study the different salary of 5 professional sports, and mainly identify the factors that are most likely to contribute to NBA player salaries. And to identify the performance variables i.e. scoring, assists, fouls, and other variables that significantly contributed to determine a NBA player's salary. Additionally, this post also indentifies some question whether NBA plsyers are overpaid or underpaid.
+=================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================================
+
+keywords: Professional Sports, National Basketball Assiciation, Player Salaries, Player Performances
+----------------------------------------------------------------------------------------------------
+
+> > > > > > > 2b0786952a0b1fca6fc5d467978798aa0467d2b1
+
 Abstract
 --------
 
@@ -901,10 +915,16 @@ Conclusions
 
 #### Based on this reasearch, I believed that nba player's salary is determined by both personal characteristics and on-court performance. For further research, I will like to study about if signing a new contract have any incentive or effect on the player's performance which makes the player be overpaid or underpaid in the year of signing the contract? And which kind of contracts and what king of players tend to be overpaid? In order to do that, I will introduce the on-court performance, personal characteristics and salary. Then I will build and find a connection between them and run two regressions to analyze the determinants of salary and overpayment in the year of signing a new contract.
 
-Reference:
-----------
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+=================================
 
-1,NBA2017-players.csv. Retrieved from <https://github.com/ucb-stat133/stat133-fall-2017/raw/master/data/nba2017-players.csv>
+Conclusions
+===========
+
+NBA players have the highest average salary among those top 5 polular professional sports. The purpose for this study was to study between NBA players' average salary and other professional sports' average salary. And identify the variables that were most likely to contribute to NBA player salaries. I found that game played and height were the two main contributors to NBA player salary. Moreover, rebounds, assists, and personal fouls were statistically significant. In regards to assists, teams may be focusing on a player's ability to contribute to scoring. In regards to rebounds, the value of a player can be enhanced if the player is able to either prevent the opponent from another scoring chance by grabbing defensive rebounds and conversely, providing additional scoring chances for his team by grabbing offensive rebounds. However, players who has a lower rebound rate tend to have a higher salary. Additionally, in the case of fouls, players who fouls a lot, tend to have a higher missed free throws.On the other hand, a player who does not accumulate fouls is definitly an asset to his team.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+> > > > > > > 2b0786952a0b1fca6fc5d467978798aa0467d2b1 \#\#Reference: 1,NBA2017-players.csv. Retrieved from <https://github.com/ucb-stat133/stat133-fall-2017/raw/master/data/nba2017-players.csv>
 
 2,Kurt, B. (2017). The average player salary and highest-paid in NBA, MLB, NHL, NFL and MLS. Retrieved from <https://www.forbes.com/sites/kurtbadenhausen/2016/12/15/average-player-salaries-in-major-american-sports-leagues/#8df0e8a10505>
 
