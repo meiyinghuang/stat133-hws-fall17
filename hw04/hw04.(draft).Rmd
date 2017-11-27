@@ -1,0 +1,25 @@
+---
+title: "hw04"
+author: "Meiying Huang"
+date: "11/16/2017"
+output: html_document
+---
+```{r}
+library(shiny)
+
+runGitHub("stat133-hws-fall17","meiyinghuang",subdir = "hw04/app")
+```
+
+```{r}
+get_min<- function(x,na.rm = TRUE){
+  stopifnot(is.numeric(x))
+    warning("non-numeric argument")
+  x<- x[!is.na(x)]
+  x<- min(x)
+  return(x)
+}
+
+x <- c(1, 4, 7, NA, 10)
+get_min(x)
+```
+
